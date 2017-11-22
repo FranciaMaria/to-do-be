@@ -55,6 +55,7 @@ class TasksController extends Controller
     {
         $task->delete();
         return $task;
+
     }
     public function completeTask(Task $task)
     {

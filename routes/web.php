@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
 });
 
@@ -25,3 +25,4 @@ Route::post('/task', 'TasksController@store');
 Route::put('/task/complete/{task}', 'TasksController@completeTask');
 Route::put('/task/completed/{task}', 'TasksController@completedTask');
 
+*/
