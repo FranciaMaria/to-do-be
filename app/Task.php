@@ -1,0 +1,17 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Task extends Model
+{
+        protected $fillable = [
+
+        'name',
+        //'user_id',
+        'description',
+        'priority',
+        'completed'
+    ];
+}
