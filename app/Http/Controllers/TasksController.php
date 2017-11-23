@@ -7,11 +7,12 @@ use App\Task;
 
 class TasksController extends Controller
 {
-   /* public function __construct() {
+
+    /*public function __construct() {
         $this->middleware('auth');
     } */
-        public function index()
-    {
+
+    public function index() {
         //$tasks = Task::where(['user_id' => Auth::user()->id])->get();
         $tasks = Task::all();
         return response()->json([
@@ -69,4 +70,5 @@ class TasksController extends Controller
         $task->save();
         return $task;
     }
+
 }

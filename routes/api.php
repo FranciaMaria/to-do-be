@@ -39,9 +39,15 @@ Route::put('/task/completed/{task}', 'TasksController@completedTask');
 */
 
 //Route::middleware('api')->resource('/task', 'TasksController');
+Auth::routes();
+
+Route::middleware('api')->post('/register', 'Auth\RegisterController@create');
+Route::middleware('api')->post('/login', 'Auth\LoginController@create');
 Route::middleware('api')->get('/task', 'TasksController@index');
 Route::middleware('api')->post('/task', 'TasksController@store');
 Route::middleware('api')->put('/task/{task}', 'TasksController@update');
 Route::middleware('api')->delete('/task/{task}', 'TasksController@destroy');
 Route::middleware('api')->put('/task/complete/{task}', 'TasksController@completeTask');
 Route::middleware('api')->put('/task/completed/{task}', 'TasksController@completedTask');
+
+
