@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
@@ -29,8 +30,8 @@ class TasksController extends Controller
         $task = Task::create([
             'name'        => request('name'),
             'description' => request('description'),
-            //'user_id'     => Auth::user()->id,
-            'priority' => request('priority')
+            'priority' => request('priority'),
+            'user_id'     => Auth::user()->id
         ]);
         return response()->json([
             'task'    => $task,
@@ -69,6 +70,14 @@ class TasksController extends Controller
         $task->completed = false;
         $task->save();
         return $task;
+    }
+
+    public function getTasksByUserId($id)
+    {
+        $tasks = Task::with('user')->where('user_id', $id)->get();
+        return response()->json([
+            'tasks'    => $tasks,
+        ], 200);
     }
 
 }

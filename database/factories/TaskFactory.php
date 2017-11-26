@@ -53,6 +53,6 @@ $factory->define(App\Task::class, function ($faker) use ($factory)  {
         'description' => $faker->text,
         'priority' => $values[$k],
         'completed' => false,
-        'user_id' => $factory->create(App\User::class)->id
+        'user_id' => User::all()->random()->id
     ];
 });

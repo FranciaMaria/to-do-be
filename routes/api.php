@@ -39,11 +39,12 @@ Route::put('/task/completed/{task}', 'TasksController@completedTask');
 */
 
 //Route::middleware('api')->resource('/task', 'TasksController');
-Auth::routes();
+//Auth::routes();
 
 Route::middleware('api')->post('/register', 'Auth\RegisterController@create');
 Route::middleware('api')->post('/login', 'Auth\LoginController@authenticate');
 Route::middleware('jwt')->get('/task', 'TasksController@index');
+Route::middleware('jwt')->get('/task/{id}', 'TasksController@getTasksByUserId');
 Route::middleware('jwt')->post('/task', 'TasksController@store');
 Route::middleware('jwt')->put('/task/{task}', 'TasksController@update');
 Route::middleware('jwt')->delete('/task/{task}', 'TasksController@destroy');

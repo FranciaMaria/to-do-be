@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -27,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/task';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -45,7 +47,7 @@ class LoginController extends Controller
         $credentials = $request->only([ 'email', 'password' ]);
         try {
             // attempt to verify the credentials and create a token for the user
-            if (! $token = \JWTAuth::attempt($credentials)) {
+            if (!$token = \JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
             }
         } catch (JWTException $e) {
@@ -53,7 +55,7 @@ class LoginController extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
         // all good so return the token
-        return response()->json(compact('token'));
+        //return response()->json(compact('token'));
 
         /*$crediential=$request->only('email','password');
         
@@ -61,5 +63,7 @@ class LoginController extends Controller
             return "Not Authenticated";
         }
         return ['token'=>$token];*/
+        $authorisedUser = Auth::user();
+        return response()->json(compact('token', 'authorisedUser'));
     }
 }
