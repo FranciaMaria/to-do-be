@@ -41,20 +41,33 @@ Route::put('/task/completed/{task}', 'TasksController@completedTask');
 //Route::middleware('api')->resource('/task', 'TasksController');
 //Auth::routes();
 
-Route::middleware('api')->post('/register', 'Auth\RegisterController@create');
+Route::middleware('api')->post('/register', 'Auth\RegisterController@store');
 Route::middleware('api')->post('/login', 'Auth\LoginController@authenticate');
-Route::middleware('jwt')->get('/task', 'TasksController@index');
+
+/*Route::middleware('jwt')->get('/task', 'TasksController@index');
 Route::middleware('jwt')->get('/task/{id}', 'TasksController@getTasksByUserId');
 Route::middleware('jwt')->post('/task', 'TasksController@store');
 Route::middleware('jwt')->put('/task/{task}', 'TasksController@update');
 Route::middleware('jwt')->delete('/task/{task}', 'TasksController@destroy');
 Route::middleware('jwt')->put('/task/complete/{task}', 'TasksController@completeTask');
-Route::middleware('jwt')->put('/task/completed/{task}', 'TasksController@completedTask');
+Route::middleware('jwt')->put('/task/completed/{task}', 'TasksController@completedTask');*/
+
 /*Route::middleware('api')->get('/task', 'TasksController@index');
 Route::middleware('api')->post('/task', 'TasksController@store');
 Route::middleware('api')->put('/task/{task}', 'TasksController@update');
 Route::middleware('api')->delete('/task/{task}', 'TasksController@destroy');
 Route::middleware('api')->put('/task/complete/{task}', 'TasksController@completeTask');
 Route::middleware('api')->put('/task/completed/{task}', 'TasksController@completedTask');*/
+Route::group([
+  'middleware' => 'jwt'
+], function () { 
+	Route::middleware('jwt')->get('/task', 'TasksController@index');
+	Route::middleware('jwt')->get('/task/{id}', 'TasksController@getTasksByUserId');
+	Route::middleware('jwt')->post('/task', 'TasksController@store');
+	Route::middleware('jwt')->put('/task/{task}', 'TasksController@update');
+	Route::middleware('jwt')->delete('/task/{task}', 'TasksController@destroy');
+	Route::middleware('jwt')->put('/task/complete/{task}', 'TasksController@completeTask');
+	Route::middleware('jwt')->put('/task/completed/{task}', 'TasksController@completedTask');
+});
 
 
