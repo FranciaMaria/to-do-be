@@ -67,7 +67,6 @@ Route::group([
 	Route::middleware('jwt')->put('/task/{task}', 'TasksController@update');
 	Route::middleware('jwt')->delete('/task/{task}', 'TasksController@destroy');
 	Route::middleware('jwt')->put('/task/complete/{task}', 'TasksController@completeTask');
-	Route::middleware('jwt')->put('/task/completed/{task}', 'TasksController@completedTask');
 });
 
 

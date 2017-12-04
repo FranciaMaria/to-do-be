@@ -61,13 +61,8 @@ class TasksController extends Controller
     }
     public function completeTask(Task $task)
     {
-        $task->completed = true;
-        $task->save();
-        return $task;
-    }
-    public function completedTask(Task $task)
-    {
-        $task->completed = false;
+        //$task->completed = true;
+        $task->completed = !$task->completed;
         $task->save();
         return $task;
     }
